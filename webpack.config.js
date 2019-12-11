@@ -24,6 +24,7 @@ module.exports={
         new HtmlWebpackPlugin({
             filename:'./index.html',
             template:'./src/template/index.ejs',
+            // favicon:'./favicon.ico',
             inject:false
         })
     ],
@@ -69,8 +70,22 @@ module.exports={
                 exclude: /node_modules/
             },
             {
-                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=1024'
+                test: /\.(woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader',
+                options: {
+                    path: path.resolve(__dirname,'dist'),
+                    name: is_prod?'fonts/[name].[hash].[ext]':'fonts/[name].[ext]',
+                    limit:512,
+                }
+            },
+            {
+                test: /\.(gif|jpg|png)\??.*$/,
+                loader: 'url-loader',
+                options: {
+                    path: path.resolve(__dirname,'dist'),
+                    name: is_prod?'img/[name].[hash].[ext]':'img/[name].[ext]',
+                    limit:512,
+                }
             }
         ]
     },
