@@ -4,7 +4,7 @@ const VueLoaderPlugin=require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin=require('optimize-css-assets-webpack-plugin');
 const webpack=require('webpack');
-const is_prod=process.env.NODE_ENV!='dev';
+const is_prod=process.env.NODE_ENV=='production';
 const css_config=[
     is_prod?MiniCssExtractPlugin.loader:'vue-style-loader',
     {
@@ -18,7 +18,7 @@ module.exports={
     plugins:[
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename:is_prod?'css/[name].[hash:8].css':'css/[name].css',
+            filename:is_prod?'css/[name].[hash].css':'css/[name].css',
             allChunks:true
         }),
         new HtmlWebpackPlugin({
@@ -70,7 +70,7 @@ module.exports={
                 exclude: /node_modules/
             },
             {
-                test: /\.(woff|svg|eot|ttf)\??.*$/,
+                test: /\.(woff|eot|ttf)\??.*$/,
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname,'dist'),
@@ -79,7 +79,7 @@ module.exports={
                 }
             },
             {
-                test: /\.(gif|jpg|png)\??.*$/,
+                test: /\.(gif|jpg|png|svg)\??.*$/,
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname,'dist'),
