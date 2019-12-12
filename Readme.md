@@ -6,3 +6,4 @@ This is a project for frontend develop, for me
 - [vue-i18n](https://github.com/kazupon/vue-i18n)
 - [webpack](https://webpack.js.org/)
 - [babel](https://babeljs.io/)
+- [axios](https://www.axios-js.com/)
