@@ -18,7 +18,7 @@ module.exports={
     plugins:[
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename:is_prod?'css/[name].[hash].css':'css/[name].css',
+            filename:'css/[name].css',
             allChunks:true
         }),
         new HtmlWebpackPlugin({
@@ -34,8 +34,8 @@ module.exports={
     },
     output:{
         path: path.resolve(__dirname,'dist'),
-        filename: is_prod?'js/[name].[hash].js':'js/[name].js',
-        publicPath:is_prod?'./':'/'
+        filename: 'js/[name].js',
+        publicPath:'/'
     },
     module:{
         rules:[
@@ -74,7 +74,7 @@ module.exports={
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname,'dist'),
-                    name: is_prod?'fonts/[name].[hash].[ext]':'fonts/[name].[ext]',
+                    name: 'fonts/[name].[ext]',
                     limit:512,
                 }
             },
@@ -83,7 +83,7 @@ module.exports={
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname,'dist'),
-                    name: is_prod?'img/[name].[hash].[ext]':'img/[name].[ext]',
+                    name: 'img/[name].[ext]',
                     limit:512,
                 }
             }
