@@ -3,6 +3,7 @@ const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 const VueLoaderPlugin=require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin=require('optimize-css-assets-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin")
 const webpack=require('webpack');
 const is_prod=process.env.NODE_ENV=='production';
 const css_config=[
@@ -94,8 +95,7 @@ module.exports={
         alias:{
             'vue':'vue/dist/vue.esm.js'
         }
-    }
-    
+    },
 }
 if(is_prod){
     module.exports.plugins.push(
@@ -103,5 +103,10 @@ if(is_prod){
     );
     module.exports.plugins.push(
         new OptimizeCssAssetsWebpackPlugin()
+    );
+    module.exports.plugins.push(
+        new CompressionPlugin({
+            test:/\.((le|c)ss|js)$/,
+        })
     )
 }
