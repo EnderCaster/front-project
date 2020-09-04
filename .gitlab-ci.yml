@@ -1,9 +1,4 @@
-image: "ubuntu:18.04"
-before_script:
-  - apt-get update -qq && apt-get install -y curl
-  - curl -sL https://deb.nodesource.com/setup_12.x | bash -
-  - apt-get install -y nodejs
-
+image: "runner-ubuntu-node:latest"
 build:
  script:
   - npm install && npm run build
