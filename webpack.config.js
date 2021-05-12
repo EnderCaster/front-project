@@ -2,8 +2,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin")
+// const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 const webpack = require('webpack');
 const is_prod = process.env.NODE_ENV == 'production';
 const css_config = [
@@ -19,8 +20,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            allChunks: true
+            filename: 'css/[name].css'
         }),
         new HtmlWebpackPlugin({
             filename: './index.html',
@@ -35,7 +35,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: is_prod ? 'js/[name].[hash].js' : 'js/[name].js',
+        filename: is_prod ? 'js/[name].[chunkhash].js' : 'js/[name].js',
         publicPath: '/'
     },
     module: {
@@ -75,7 +75,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname, 'dist'),
-                    name: is_prod ? 'fonts/[name].[hash].[ext]' : 'fonts/[name].[ext]',
+                    name: is_prod ? 'fonts/[name].[chunkhash].[ext]' : 'fonts/[name].[ext]',
                     limit: 512,
                 }
             },
@@ -84,7 +84,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname, 'dist'),
-                    name: is_prod ? 'img/[name].[hash].[ext]' : 'img/[name].[ext]',
+                    name: is_prod ? 'img/[name].[chunkhash].[ext]' : 'img/[name].[ext]',
                     limit: 512,
                 }
             }
@@ -102,7 +102,7 @@ if (is_prod) {
         new webpack.BannerPlugin('Created by EnderCaster | Site: https://wordpress.endercaster.com')
     );
     module.exports.plugins.push(
-        new OptimizeCssAssetsWebpackPlugin()
+        new CssMinimizerPlugin()
     );
     module.exports.plugins.push(
         new CompressionPlugin({
