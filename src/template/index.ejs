@@ -6,14 +6,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[0] %>">
-    <!-- <link rel="shortcut icon" href="<%= htmlWebpackPlugin.files.favicon %>" type="image/x-icon">
-    <link rel="icon" href="<%= htmlWebpackPlugin.files.favicon %>">
-    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.favicon %>">
-    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.favicon %>"> -->
+    <style>
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+        }
+
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 400px;
+            height: 400px;
+            margin: -170px 0 0 -170px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #2d8cf0;
+            -webkit-animation: spin-rev 2s infinite;
+            -ms-animation: spin-rev 2s infinite;
+            -moz-animation: spin-rev 2s infinite;
+            -o-animation: spin-rev 2s infinite;
+            animation: spin-rev 2s infinite;
+            z-index: 1001;
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #2d8cf0;
+            -webkit-animation: spin 3s linear infinite;
+            -moz-animation: spin 3s linear infinite;
+            -o-animation: spin 3s linear infinite;
+            -ms-animation: spin 3s linear infinite;
+            animation: spin 3s linear infinite;
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #2d8cf0;
+            -moz-animation: spin 1.5s linear infinite;
+            -o-animation: spin 1.5s linear infinite;
+            -ms-animation: spin 1.5s linear infinite;
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+        }
+
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin-rev {
+            0% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes spin-rev {
+            0% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+        }
+
+        .loaded #loader {
+            opacity: 0;
+            -webkit-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+        }
+
+        .loaded #loader-wrapper {
+            visibility: hidden;
+            -webkit-transform: translateY(-100%);
+            -ms-transform: translateY(-100%);
+            transform: translateY(-100%);
+            -webkit-transition: all 0.3s 1s ease-out;
+            transition: all 0.3s 1s ease-out;
+        }
+
+        .no-js #loader-wrapper {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+        </div>
+    </div>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[0] %>"></script>
     <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[1] %>"></script>
 </body>
