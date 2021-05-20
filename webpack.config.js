@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css'
+        	filename: is_prod?'css/[name].[chunkhash].css':'css/[name].css'
         }),
         new HtmlWebpackPlugin({
             filename: './index.html',
@@ -75,7 +75,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname, 'dist'),
-                    name: is_prod ? 'fonts/[name].[chunkhash].[ext]' : 'fonts/[name].[ext]',
+                    name: is_prod ? 'fonts/[name].[hash].[ext]' : 'fonts/[name].[ext]',
                     limit: 512,
                 }
             },
@@ -84,7 +84,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     path: path.resolve(__dirname, 'dist'),
-                    name: is_prod ? 'img/[name].[chunkhash].[ext]' : 'img/[name].[ext]',
+                    name: is_prod ? 'img/[name].[hash].[ext]' : 'img/[name].[ext]',
                     limit: 512,
                 }
             }
